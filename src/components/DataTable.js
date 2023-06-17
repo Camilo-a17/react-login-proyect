@@ -1,23 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
 const DataTable = () => {
   const [tableData, setTableData] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8000/data')
+    fetchData();
+  }, []);
+
+  const fetchData = () => {
+    fetch("http://localhost:8000/data")
       .then((response) => response.json())
       .then((data) => {
         setTableData(data);
       })
       .catch((error) => {
-        console.error('Error al obtener los datos:', error);
+        console.error("Error al obtener los datos:", error);
       });
-  }, []);
+  };
 
   return (
-    <div>
-      <h2>Tabla de datos</h2>
-      <table>
+    <div className="card p-4">
+      <h2 className="card-title mb-4">Tabla de datos</h2>
+      <table className="table">
         <thead>
           <tr>
             <th>Año</th>
@@ -42,4 +46,5 @@ const DataTable = () => {
 };
 
 export default DataTable;
+
 

@@ -46,6 +46,34 @@
       "city": "",
       "votes": "",
       "id": 5
+    },
+    {
+      "year": "2019",
+      "party": "pacto",
+      "city": "la union",
+      "votes": "3426",
+      "id": 6
+    },
+    {
+      "year": "2067",
+      "party": "lasnlk",
+      "city": "aqnlqks",
+      "votes": "16521",
+      "id": 7
+    },
+    {
+      "year": "1",
+      "party": "ahiqw",
+      "city": "qhwiq",
+      "votes": "2313",
+      "id": 8
+    },
+    {
+      "year": "23",
+      "party": "aslkjas",
+      "city": "apojso",
+      "votes": "0",
+      "id": 9
     }
   ]
 }

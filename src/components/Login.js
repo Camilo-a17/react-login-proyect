@@ -25,25 +25,38 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <input
-        type="text"
-        placeholder="Nombre de usuario"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <br />
-      <input
-        type="password"
-        placeholder="Contraseña"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <br />
-      <button onClick={handleLogin}>Iniciar sesión</button>
+    <div className="container d-flex justify-content-center align-items-center vh-100">
+      <div className="card">
+        <div className="card-body">
+          <h2 className="card-title">Login</h2>
+          <div className="mb-3">
+            <label htmlFor="username" className="form-label">Nombre de usuario</label>
+            <input
+              type="text"
+              className="form-control"
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label">Contraseña</label>
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <button className="btn btn-primary" onClick={handleLogin}>Iniciar sesión</button>
+        </div>
+      </div>
     </div>
   );
 };
 
 export default Login;
+
+
+

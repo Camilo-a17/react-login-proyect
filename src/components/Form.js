@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
-const Form = () => {
-  const [year, setYear] = useState('');
-  const [party, setParty] = useState('');
-  const [city, setCity] = useState('');
-  const [votes, setVotes] = useState('');
-  const [dataUpdated, setDataUpdated] = useState(false);
+const Form = ({ updateTableData }) => {
+  const [year, setYear] = useState("");
+  const [party, setParty] = useState("");
+  const [city, setCity] = useState("");
+  const [votes, setVotes] = useState("");
   const history = useHistory();
 
   const handleSubmit = (e) => {
@@ -14,61 +13,92 @@ const Form = () => {
 
     const formData = { year, party, city, votes };
 
-    fetch('http://localhost:8000/data', {
-      method: 'POST',
+    fetch("http://localhost:8000/data", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log('Respuesta del servidor:', data);
+        console.log("Respuesta del servidor:", data);
 
-        // Aquí puedes realizar acciones adicionales después de enviar los datos al servidor
+        // Actualizar los datos en la tabla
+        updateTableData(data);
 
         // Redirigir al dashboard
-        history.push('/dashboard');
-
-        // Indicar que los datos han sido actualizados
-        setDataUpdated(true);
+        history.push("/dashboard");
       })
       .catch((error) => {
-        console.error('Error al enviar los datos:', error);
+        console.error("Error al enviar los datos:", error);
       });
 
     // Reiniciar los campos del formulario
-    setYear('');
-    setParty('');
-    setCity('');
-    setVotes('');
+    setYear("");
+    setParty("");
+    setCity("");
+    setVotes("");
   };
 
   return (
-    <div>
-      <h2>Formulario</h2>
+    <div className="card p-4">
+      <h2 className="card-title mb-4">Formulario</h2>
       <form onSubmit={handleSubmit}>
-        <label>
-          Año:
-          <input type="text" value={year} onChange={(e) => setYear(e.target.value)} />
-        </label>
-        <label>
-          Partido Político:
-          <input type="text" value={party} onChange={(e) => setParty(e.target.value)} />
-        </label>
-        <label>
-          Ciudad:
-          <input type="text" value={city} onChange={(e) => setCity(e.target.value)} />
-        </label>
-        <label>
-          Número de Votos:
-          <input type="text" value={votes} onChange={(e) => setVotes(e.target.value)} />
-        </label>
-        <button type="submit">Agregar</button>
+        <div className="mb-3">
+          <label htmlFor="year" className="form-label">
+            Año:
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="year"
+            value={year}
+            onChange={(e) => setYear(e.target.value)}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="party" className="form-label">
+            Partido Político:
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="party"
+            value={party}
+            onChange={(e) => setParty(e.target.value)}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="city" className="form-label">
+            Ciudad:
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="city"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="votes" className="form-label">
+            Número de Votos:
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="votes"
+            value={votes}
+            onChange={(e) => setVotes(e.target.value)}
+          />
+        </div>
+        <button type="submit" className="btn btn-primary">
+          Agregar
+        </button>
       </form>
     </div>
   );
 };
 
 export default Form;
-
